@@ -1,0 +1,19 @@
+api:
+  dashboard: true
+
+http:
+  middlewares:
+    secureHeaders:
+      headers:
+        frameDeny: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 31536000
+
+tls:
+  options:
+    default:
+      minVersion: VersionTLS12
+      sniStrict: true
