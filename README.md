@@ -5,7 +5,27 @@
 - Base Traefik configuration with Docker Compose.
 - Rust application to add hosts to Traefik. (All Rust sources are in `./src`)
 
-## How to use it?
+## How to start the Traefik service?
+
+1. Create a Docker network named `web`
+
+```bash
+docker network create web
+```
+
+2. Replace your email in `docker-compose.yml`.
+
+```
+--certificatesresolvers.acmeresolver.acme.email=youremail@email.com
+```
+
+3. Run Traefik
+
+```bash
+docker compose up -d
+```
+
+## How to add a new host using the Rust application?
 
 1. Build the Rust application (optional if using prebuilt)
 
@@ -13,15 +33,7 @@
 cargo build --release
 ```
 
-2. Replace your email in `docker-compose.yml`. Currently (youremail@email.com)
-
-3. Run Traefik
-
-```bash
-docker-compose up -d
-```
-
-4. Run the Rust application
+2. Run the Rust application
 
 If you built the application:
 
@@ -43,7 +55,18 @@ For Linux:
 ./prebuilt/x86_64-unknown-linux-musl/traefik
 ```
 
-## How to add a new host with docker-compose?
+After following the steps, the application will guide you through the process of adding a new host. The application will add the host to `./config/services/service-name.yml`, which is a Docker volume.
+
+3. Restart Traefik
+
+```bash
+chmod +x ./restart
+./restart
+```
+
+## How to add a new host with Docker Compose?
+
+1. Configure these labels and networks in your service's Docker Compose file:
 
 ```yaml
 services:
@@ -51,7 +74,7 @@ services:
     image: your-image
     labels:
       - "traefik.enable=true"
-      # replace yourhost.com with your host and your-service with your service name
+      # Replace yourhost.com with your host and your-service with your service name
       - "traefik.http.routers.your-service.rule=Host(`yourhost.com`)"
       - "traefik.http.routers.your-service.tls=true"
       - "traefik.http.routers.your-service.tls.certresolver=acmeresolver"
@@ -64,6 +87,19 @@ services:
 networks:
   web:
     external: true
+```
+
+Traefik will automatically detect the last exposed port of the service and add it to the router. If you want to use a different port, you can add the following label:
+
+```yaml
+- "traefik.http.services.your-service.loadbalancer.server.port=8080"
+```
+
+2. Restart Traefik
+
+```bash
+chmod +x ./restart
+./restart
 ```
 
 ## Authors
