@@ -7,7 +7,7 @@
 
 ## How to use it?
 
-1. Build the Rust application
+1. Build the Rust application (optional if using prebuilt)
 
 ```bash
 cargo build --release
@@ -21,8 +21,24 @@ docker-compose up -d
 
 3. Run the Rust application
 
+If you built the application:
+
 ```bash
 ./target/release/traefik
+```
+
+If you are using the prebuilt application:
+
+For Windows:
+
+```bash
+./prebuilt/x86_64-pc-windows-msvc/traefik.exe
+```
+
+For Linux:
+
+```bash
+./prebuilt/x86_64-unknown-linux-musl/traefik
 ```
 
 ## Authors
