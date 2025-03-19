@@ -13,13 +13,15 @@
 cargo build --release
 ```
 
-2. Run Traefik
+2. Replace your email in `docker-compose.yml`. Currently (youremail@email.com)
+
+3. Run Traefik
 
 ```bash
 docker-compose up -d
 ```
 
-3. Run the Rust application
+4. Run the Rust application
 
 If you built the application:
 
@@ -39,6 +41,29 @@ For Linux:
 
 ```bash
 ./prebuilt/x86_64-unknown-linux-musl/traefik
+```
+
+## How to add a new host with docker-compose?
+
+```yaml
+services:
+  your-service:
+    image: your-image
+    labels:
+      - "traefik.enable=true"
+      # replace yourhost.com with your host and your-service with your service name
+      - "traefik.http.routers.your-service.rule=Host(`yourhost.com`)"
+      - "traefik.http.routers.your-service.tls=true"
+      - "traefik.http.routers.your-service.tls.certresolver=acmeresolver"
+      - "traefik.http.routers.your-service.entrypoints=websecure"
+    # Don't forget to add the service to the web network
+    networks:
+      - web
+
+# Don't forget to add the service to the web network
+networks:
+  web:
+    external: true
 ```
 
 ## Authors
