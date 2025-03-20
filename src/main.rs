@@ -59,7 +59,7 @@ fn main() {
             service: format!("{}-service", service_name),
             entry_points: vec!["websecure".to_string()],
             tls: Tls {
-                cert_resolver: "myresolver".to_string(),
+                cert_resolver: "acmeresolver".to_string(),
             },
         },
     );
