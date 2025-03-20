@@ -21,8 +21,13 @@ pub fn alphanumeric_validator(val: &str) -> Result<Validation, Box<dyn Error + S
 
 pub fn domain_validator(val: &str) -> Result<Validation, Box<dyn Error + Send + Sync>> {
     let re = Regex::new(DOMAIN_RE).unwrap();
-    if !re.is_match(val) {
-        return Ok(Validation::Invalid("Invalid domain".into()));
+    for address in val.split(';') {
+        let address = address.trim();
+        if !re.is_match(address) {
+            return Ok(Validation::Invalid(
+                format!("Invalid domain: {}", address).into(),
+            ));
+        }
     }
     Ok(Validation::Valid)
 }

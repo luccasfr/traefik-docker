@@ -15,7 +15,7 @@ fn main() {
         "---------------------------------------------".green()
     );
     println!("{}", "Traefik Domain Creator".cyan());
-    println!("{}", "developed by Lucas Ferreira - Jera Soft Co ®".blue());
+    println!("{}", "Developed by Lucas Ferreira - Jera Soft Co ®".blue());
     println!(
         "{}",
         "---------------------------------------------".green()
@@ -30,9 +30,10 @@ fn main() {
 
     let host = Text::new("Host name that will proxy to a local service?")
         .with_validator(domain_validator)
-        .with_help_message("e.g.: example.com")
+        .with_help_message("e.g.: example.com (use ; to separate multiple hosts)")
         .prompt()
         .expect("Failed to get host");
+    
 
     let www = Confirm::new("Do you want to add www to the domain?")
         .with_default(false)
@@ -46,9 +47,15 @@ fn main() {
         .expect("Failed to get address");
 
     let rule = if www {
-        format!("Host(`{}`) || Host(`www.{}`)", host, host)
+        host.split(';')
+            .map(|h: &str| format!("Host(`{}`) || Host(`www.{}`)", h.trim(), h.trim()))
+            .collect::<Vec<String>>()
+            .join(" || ")
     } else {
-        format!("Host(`{}`)", host)
+        host.split(';')
+            .map(|h| format!("Host(`{}`)", h.trim()))
+            .collect::<Vec<String>>()
+            .join(" || ")
     };
 
     let mut routers = HashMap::new();
