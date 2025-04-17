@@ -1,4 +1,4 @@
-# Traefik Docker Setup
+# Traefik Docker
 
 [<img src="https://flagcdn.com/w20/us.png" alt="United States Flag"> English Version](./README.md)
 
