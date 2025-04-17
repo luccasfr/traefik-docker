@@ -1,4 +1,4 @@
-# Traefik Boilerplate
+# Traefik Docker Setup
 
 [<img src="https://flagcdn.com/w20/br.png" alt="Bandeira do Brasil"> Versão em Português](./README.pt-BR.md)
 
