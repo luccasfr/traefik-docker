@@ -34,7 +34,6 @@ jobs:
         run: |
           cargo build --release --target x86_64-unknown-linux-musl
           mv target/x86_64-unknown-linux-musl/release/add-host add-host-linux-${{ github.ref_name }}
-
       
       - name: Create Release
         id: create_release

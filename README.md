@@ -1,5 +1,7 @@
 # Traefik Boilerplate
 
+[<img src="https://flagcdn.com/w20/br.png" alt="Bandeira do Brasil"> Versão em Português](./README.pt-BR.md)
+
 ## What's included?
 
 - Base Traefik configuration with Docker Compose.
@@ -27,7 +29,11 @@ docker compose up -d
 
 ## How to add a new host using the Rust application?
 
-1. Build the Rust application (optional if using prebuilt)
+1. Download the latest release from GitHub
+
+Go to the [Releases page](https://github.com/luccasfr/traefik-boilerplate/releases) and download the appropriate version for your operating system.
+
+Alternatively, you can build from source:
 
 ```bash
 cargo build --release
@@ -35,24 +41,18 @@ cargo build --release
 
 2. Run the Rust application
 
-If you built the application:
+If you built the application from source:
 
 ```bash
-./target/release/traefik
+chmod +x ./target/release/add-host
+./target/release/add-host
 ```
 
-If you are using the prebuilt application:
-
-For Windows:
+If you downloaded a release:
 
 ```bash
-./prebuilt/x86_64-pc-windows-msvc/traefik.exe
-```
-
-For Linux:
-
-```bash
-./prebuilt/x86_64-unknown-linux-musl/traefik
+chmod +x ./add-host*
+./add-host*
 ```
 
 After following the steps, the application will guide you through the process of adding a new host. The application will add the host to `./config/services/service-name.yml`, which is a Docker volume.
