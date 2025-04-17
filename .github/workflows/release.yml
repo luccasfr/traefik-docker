@@ -38,8 +38,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            backup_db-linux-${{ github.ref_name }}
-            restore_db-linux-${{ github.ref_name }}
+            add-host-linux-${{ github.ref_name }}
           draft: false
           prerelease: false
           generate_release_notes: true
