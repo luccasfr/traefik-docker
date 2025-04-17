@@ -1,0 +1,14 @@
+http:
+  routers:
+    test-router:
+      rule: Host(`traefik.test.com`) || Host(`traefik.test.net`)
+      service: test-service
+      entryPoints:
+      - websecure
+      tls:
+        certResolver: acmeresolver
+  services:
+    test-service:
+      loadBalancer:
+        servers:
+        - url: http://192.168.1.1:9000
