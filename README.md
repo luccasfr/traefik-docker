@@ -2,6 +2,11 @@
 
 [<img src="https://flagcdn.com/w20/br.png" alt="Bandeira do Brasil"> Versão em Português](./README.pt-BR.md)
 
+## Requirements
+
+- Linux operating system
+- Docker and Docker Compose installed and working
+
 ## What's included?
 
 - Base Traefik configuration with Docker Compose.
@@ -31,7 +36,7 @@ docker compose up -d
 
 1. Download the latest release from GitHub
 
-Go to the [Releases page](https://github.com/luccasfr/traefik-boilerplate/releases) and download the appropriate version for your operating system.
+Go to the [Releases page](https://github.com/luccasfr/traefik-boilerplate/releases) and download the latest version.
 
 Alternatively, you can build from source:
 
